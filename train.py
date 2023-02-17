@@ -22,9 +22,9 @@ def tokenize_function(text):
     encoding = tokenizer(text['answer'] + "</s>" + text['question'], padding="max_length",
                          max_length=512, truncation=True)
     if (text["chatgpt"] == True):
-        encoding["labels"] = 1
+        encoding["label"] = 1
     else:
-        encoding["labels"] = 0
+        encoding["label"] = 0
     return encoding
 
 

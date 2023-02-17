@@ -20,14 +20,12 @@ def compute_metrics(eval_pred):
 
 def tokenize_function(text):
     print(text)
-    # return_tensors='pt'
     encoding = tokenizer(text['answer'] + "</s>" + text['question'], padding="max_length",
                          max_length=512, truncation=True)
     if (text["chatgpt"] == True):
         encoding["labels"] = 1
     else:
         encoding["labels"] = 0
-    print(type(encoding))
     return encoding
 
 
@@ -35,7 +33,6 @@ training_args = TrainingArguments(
     output_dir="test_trainer", evaluation_strategy="epoch")
 
 
-# {"train": "train.json", "test": "test.json"})
 dataset = load_dataset("data",  data_files={
                        "train": "train.jsonl", "test": "test.jsonl"})
 tokenized_datasets = dataset.map(tokenize_function, batched=False)
@@ -43,9 +40,8 @@ print(tokenized_datasets)
 
 small_train_dataset = tokenized_datasets["train"].shuffle(
     seed=42)
-print(small_train_dataset)
-small_eval_dataset = tokenized_datasets["test"]
-# print(small_train_dataset.data)
+small_eval_dataset = tokenized_datasets["test"].shuffle(
+    seed=42)
 
 # Train
 trainer = Trainer(

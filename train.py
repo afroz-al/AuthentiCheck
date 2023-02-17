@@ -8,7 +8,7 @@ metric = evaluate.load("accuracy")
 tokenizer = AutoTokenizer.from_pretrained(
     "Hello-SimpleAI/chatgpt-detector-roberta")
 model = AutoModelForSequenceClassification.from_pretrained(
-    "Hello-SimpleAI/chatgpt-detector-roberta")
+    "Hello-SimpleAI/chatgpt-detector-roberta").to("cuda")
 id2label = ['Human', 'ChatGPT']
 
 

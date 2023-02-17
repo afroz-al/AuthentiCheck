@@ -5,9 +5,9 @@ import numpy as np
 import evaluate
 
 tokenizer = AutoTokenizer.from_pretrained(
-    "./test_trainer")
+    "./authenticheck")
 model = AutoModelForSequenceClassification.from_pretrained(
-    "./test_trainer")
+    "./authenticheck")
 # .to("cuda")
 
 

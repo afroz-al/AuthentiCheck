@@ -29,13 +29,12 @@ def tokenize_function(text):
 
 
 training_args = TrainingArguments(
-    output_dir="test_trainer", evaluation_strategy="epoch")
+    output_dir="authenticheck", evaluation_strategy="epoch")
 
 
-dataset = load_dataset("data",  data_files={
+dataset = load_dataset("datasets",  data_files={
                        "train": "train.jsonl", "test": "test.jsonl"})
 tokenized_datasets = dataset.map(tokenize_function, batched=False)
-print(tokenized_datasets)
 
 small_train_dataset = tokenized_datasets["train"].shuffle(
     seed=42)

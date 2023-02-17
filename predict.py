@@ -8,6 +8,7 @@ tokenizer = AutoTokenizer.from_pretrained(
     "./test_trainer")
 model = AutoModelForSequenceClassification.from_pretrained(
     "./test_trainer")
+# .to("cuda")
 
 
 def predict_func(text: str):

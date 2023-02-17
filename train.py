@@ -19,7 +19,6 @@ def compute_metrics(eval_pred):
 
 
 def tokenize_function(text):
-    print(text)
     encoding = tokenizer(text['answer'] + "</s>" + text['question'], padding="max_length",
                          max_length=512, truncation=True)
     if (text["chatgpt"] == True):

@@ -4,7 +4,6 @@ from transformers import TrainingArguments, Trainer
 import numpy as np
 import evaluate
 
-metric = evaluate.load("accuracy")
 tokenizer = AutoTokenizer.from_pretrained(
     "Hello-SimpleAI/chatgpt-detector-roberta")
 model = AutoModelForSequenceClassification.from_pretrained(
@@ -15,7 +14,10 @@ id2label = ['Human', 'ChatGPT']
 def compute_metrics(eval_pred):
     logits, labels = eval_pred
     predictions = np.argmax(logits, axis=-1)
-    return metric.compute(predictions=predictions, references=labels)
+    accuracy_metric = evaluate.load("accuracy")
+    recall_metric = evaluate.load("recall")
+    precision_metric = evaluate.load("precision")
+    return accuracy_metric.compute(predictions=predictions, references=lagit dofbels), recall_metric.compute(predictions=predictions, references=labels), precision_metric.compute(predictions=predictions, references=labels)
 
 
 def tokenize_function(text):

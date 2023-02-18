@@ -17,7 +17,7 @@ def compute_metrics(eval_pred):
     accuracy_metric = evaluate.load("accuracy")
     recall_metric = evaluate.load("recall")
     precision_metric = evaluate.load("precision")
-    return accuracy_metric.compute(predictions=predictions, references=lagit dofbels), recall_metric.compute(predictions=predictions, references=labels), precision_metric.compute(predictions=predictions, references=labels)
+    return accuracy_metric.compute(predictions=predictions, references=labels), recall_metric.compute(predictions=predictions, references=labels), precision_metric.compute(predictions=predictions, references=labels)
 
 
 def tokenize_function(text):

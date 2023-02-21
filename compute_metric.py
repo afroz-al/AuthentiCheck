@@ -41,7 +41,7 @@ def predict(row):
 
 
 dataset = load_dataset("datasets",  data_files={
-    "train": "train.jsonl", "test": "test.jsonl"})
+    "train": "train-new.jsonl", "test": "test-new.jsonl"})
 dataset["test"].map(predict, batched=False)
 
 print(classification_report(y_true, y_pred))

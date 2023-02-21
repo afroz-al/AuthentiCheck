@@ -37,7 +37,7 @@ training_args = TrainingArguments(
 
 
 dataset = load_dataset("datasets",  data_files={
-                       "train": "train.jsonl", "test": "test.jsonl"})
+                       "train": "train-new.jsonl", "test": "test-new.jsonl"})
 tokenized_datasets = dataset.map(tokenize_function, batched=False)
 
 small_train_dataset = tokenized_datasets["train"].shuffle(

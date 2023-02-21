@@ -25,7 +25,7 @@ def getDict(set):
 
 def parseChatGPT():
     # Open the CSV file
-    with open('dataset-chatgpt.csv', 'r') as csv_file:
+    with open('datasets/dataset-chatgpt.csv', 'r') as csv_file:
         reader = csv.DictReader(csv_file)
 
         # Split the CSV rows into two lists
@@ -42,7 +42,7 @@ def parseChatGPT():
 
 def parseHuman():
     # Open the CSV file
-    with open('dataset-human.csv', 'r', encoding='utf-8') as csv_file:
+    with open('datasets/dataset-human.csv', 'r', encoding='utf-8') as csv_file:
         reader = csv.DictReader(csv_file)
 
         # Split the CSV rows into two lists
@@ -64,16 +64,23 @@ def trainAndTest():
     train = []
     test = []
     for dictionary in dictionaries:
+        if dictionary['question'] == topics[4][1] or dictionary['question'] == topics[5][1]:
+            is_test = True
+        else:
+            is_test = False
         human_answers = dictionary['human_answers']
         chatgp_answers = dictionary['chatgp_answers']
         # Shuffle the answers
         random.shuffle(human_answers)
         random.shuffle(chatgp_answers)
 
-        train.append({'question': dictionary['question'], 'human_answers': human_answers[:int(len(
-            human_answers) * 0.8)], 'chatgp_answers': chatgp_answers[:int(len(chatgp_answers) * 0.8)]})
-        test.append({'question': dictionary['question'], 'human_answers': human_answers[int(len(
-            human_answers) * 0.8):], 'chatgp_answers': chatgp_answers[int(len(chatgp_answers) * 0.8):]})
+        if is_test == True:
+            test.append(
+                {'question': dictionary['question'], 'human_answers': human_answers, 'chatgp_answers': chatgp_answers})
+        else:
+            train.append(
+                {'question': dictionary['question'], 'human_answers': human_answers, 'chatgp_answers': chatgp_answers})
+
     return train, test
 
 

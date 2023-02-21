@@ -1,6 +1,7 @@
 from sklearn.metrics import classification_report
 from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from sklearn import metrics
 
 
 """"
@@ -44,3 +45,7 @@ dataset = load_dataset("datasets",  data_files={
 dataset["test"].map(predict, batched=False)
 
 print(classification_report(y_true, y_pred))
+print("Precision ==", metrics.precision_score(y_true, y_pred))
+print("Recall ==", metrics.recall_score(y_true, y_pred))
+print("F1 ==", metrics.f1_score(y_true, y_pred))
+print("Accuracy ==", metrics.accuracy_score(y_true, y_pred))

@@ -34,7 +34,7 @@ def predict_text():
     text = request.form["text"]
     output = predict(text)
 
-    return render_template('index.html', prediction_text=f'{output}', input_text=text)
+    return render_template('index.html', prediction_text=f'{output}', input_text=text, human=output['Human'], chatgpt=output['ChatGPT'])
 
 
 if __name__ == "__main__":

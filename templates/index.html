@@ -28,14 +28,14 @@
       <p></p>
       <!-- Inputs for our ML model -->
       <form action="/predict" method="post" style="text-align: center;">
-        <input
+        <textarea
           type="text"
           name="text"
-          style="width: 400px"
+          style="width: 400px;height: 200px;"
           placeholder="Your sentence here"
           required="required"
-          value="{{ input_text}}"
-        />
+        >{{ input_text}}</textarea>
+
       </br>
         <button type="submit" class="btn btn-primary btn-block btn-large" style="margin-top: 10px;">
           Compute!
@@ -44,7 +44,22 @@
 
       <br />
       <br />
-      <b> {{ prediction_text }} </b>
+      {% if human %}
+      <table class="table" style="width:300px">
+        <tr>
+          <th>Source</th>
+          <th>Probability</th>
+        </tr>
+        <tr>
+          <td>Human</td>
+          <td>{{ human}}</td>
+        </tr>
+        <tr>
+          <td>ChatGPT</td>
+          <td>{{ chatgpt}}</td>
+        </tr>
+      </table>
+      {% endif %}
     </div>
   </body>
 </html>
